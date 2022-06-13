@@ -1,0 +1,14 @@
+#%RAML 1.0 Trait
+responses:
+  200:
+    headers:
+      Content-Type: 
+        type: string
+        enum: [application/json]
+        description: Content type 
+        example: "application/json"  
+    body:
+      application/json:
+          type: !include ../../data-types/standard-response-type.raml 
+          example: !include ../../examples/success/200-example.raml
+        

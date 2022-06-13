@@ -1,0 +1,31 @@
+#%RAML 1.0 SecurityScheme
+type: x-client-enforcement
+describedBy:
+  headers:
+    client_id:
+      type: string
+      required: true
+      description: Client Id
+      pattern: ^[{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$
+      example: 4E5EcEBD-e40B-AA99-c43d-1e4aA609f34f
+    client_secret:
+      type: string
+      required: true
+      pattern: ^[{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$
+      description: Client Secret
+      example: 4E5EcEBD-e40B-AA99-c43d-1e4aA609f34f
+  responses:
+    401:
+      description: 401 Response
+      headers:
+        Content-Type: 
+          type: string
+          pattern: application/json
+          enum: [application/json]    
+          description: Content type 
+          example: "application/json"
+      body:
+        application/json:
+          type: !include ../data-types/standard-error-response-type.raml
+          examples: !include ../examples/fault/401-example.raml
+          

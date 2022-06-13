@@ -1,0 +1,31 @@
+#%RAML 1.0 SecurityScheme
+type: Basic Authentication
+description: |
+  This API supports Basic authentication for authenticating
+  all API requests using client ID and secret key.
+describedBy:
+  headers:
+    Authorization:
+      description: |
+        Used to send base64-encoded client ID and secret key.
+        Use the following format when encoding,
+        <clientId>:<secretKey>.
+      type: string
+      pattern: ^[a-zA-Z0-9_.-]*$
+      example: Y2xpZW50SWQ6c2VjcmV0S2V5
+      required: true
+  responses:
+    401:
+      description: |
+        Unauthorized.
+      headers:
+        Content-Type: 
+          type: string
+          enum: [application/json]
+          pattern: application/json
+          description: Content type 
+          example: "application/json"    
+      body:
+        application/json:
+          type: !include ../data-types/standard-error-response-type.raml
+          examples: !include ../examples/fault/401-example.raml

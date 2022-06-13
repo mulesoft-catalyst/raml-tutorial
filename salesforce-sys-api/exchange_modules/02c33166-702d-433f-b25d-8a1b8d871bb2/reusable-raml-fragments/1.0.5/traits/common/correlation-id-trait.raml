@@ -1,0 +1,8 @@
+#%RAML 1.0 Trait
+    headers:
+      x-correlation-id:
+        required: false
+        type: string
+        pattern: ^[{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$
+        example: e393ef07-de7d-46c7-b514-27581be526d2
+        description: Unique value to track end to end request

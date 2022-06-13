@@ -1,0 +1,17 @@
+#%RAML 1.0 DataType
+  additionalProperties: false
+  description: This is batch response type
+  properties:
+    correlationId: 
+      type: string
+      description : Correlation Id 
+      required: true 
+    code: 
+      type: string
+      description : Response code
+      required: false
+    message:
+      type: string
+      description : Response message 
+      required: false 
+      

@@ -1,0 +1,46 @@
+#%RAML 1.0 SecurityScheme
+description: |
+  Application supports OAuth 2.0 for authenticating all API requests.
+type: OAuth 2.0
+describedBy:
+  headers:
+    Authorization:
+      description: |
+          Used to send a valid OAuth 2 access token. Do not use
+          with the "access_token" query string parameter.
+      type: string
+      pattern: ^[a-zA-Z0-9_.-]*$
+      example: Y2xpZW50SWQ6c2VjcmV0S2V5
+      required: true
+  queryParameters:
+    access_token:
+      description: |
+          Used to send a valid OAuth 2 access token. Do not use with
+          the "Authorization" header.
+      type: string
+      pattern: ^[a-zA-Z0-9_.-]*$
+      example: Y2xpZW50SWQ6c2VjcmV0S2V5
+      required: true
+  responses:
+    401:
+      description: |
+          Bad or expired token. This can happen if the user or Dropbox
+          revoked or expired an access token. To fix, re-authenticate
+          the user.
+      headers:
+        Content-Type: 
+          type: string
+          enum: [application/json]
+          description: Content type 
+          pattern: application/json
+          example: "application/json"
+      body:
+        application/json:
+          type: !include ../data-types/standard-error-response-type.raml
+          examples: !include ../examples/fault/401-example.raml
+
+   
+settings:
+  authorizationUri: https://changehost/oauth2/authorize
+  accessTokenUri: https://changehost/oauth2/token
+  authorizationGrants: [ authorization_code, client_credentials]

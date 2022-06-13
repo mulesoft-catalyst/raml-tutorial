@@ -1,0 +1,22 @@
+#%RAML 1.0 DataType
+  additionalProperties: false
+  description: This is standard error response
+  properties:
+    errorCode: 
+      type: string
+      description: Response code
+      required: false
+    errorMessage:
+      type: string
+      description: Response message
+      required: false 
+    transactionId:
+      type: string
+      description: Transaction Id
+      required: false 
+    timeStamp:
+      type: string
+      description: Time Stamp
+      required: false 
+
+  examples: !include ../examples/fault/401-example.raml
